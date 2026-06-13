@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Tree - Business Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-navy: #0A1628;
+            --rich-burgundy: #800020;
+            --cream: #F8F6F0;
+            --soft-gold: #F5E6D3;
+            --accent-teal: #2C5F6F;
+            --shadow-dark: rgba(10, 22, 40, 0.3);
+            --shadow-gold: rgba(212, 175, 55, 0.2);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #1a2942 50%, var(--deep-navy) 100%);
+            min-height: 100vh;
+            color: var(--cream);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(44, 95, 111, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, #FFE5A0 50%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--soft-gold);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            margin: 30px auto;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .portal-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .portal-card:nth-child(1) { animation-delay: 0.1s; }
+        .portal-card:nth-child(2) { animation-delay: 0.2s; }
+        .portal-card:nth-child(3) { animation-delay: 0.3s; }
+        .portal-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portal-card:hover::before {
+            opacity: 1;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 
+                0 20px 60px rgba(10, 22, 40, 0.5),
+                0 0 40px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .portal-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            letter-spacing: 0.05em;
+        }
+
+        .portal-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, #B8942A 100%);
+            color: var(--deep-navy);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .portal-button:hover::before {
+            left: 100%;
+        }
+
+        .portal-button:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .portal-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Dropdown Styles */
+        .dropdown-container {
+            position: relative;
+            z-index: 100;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-toggle.active::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, rgba(10, 22, 40, 0.98) 0%, rgba(26, 41, 66, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 400px;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .dropdown-menu.active {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 15px 20px;
+            color: var(--soft-gold);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            margin-bottom: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--primary-gold);
+            padding-left: 30px;
+            color: var(--primary-gold);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--soft-gold);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+            }
+
+            .portal-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .dropdown-menu {
+                min-width: 300px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Urban Tree</h1>
+            <div class="divider"></div>
+            <p class="subtitle">Business Portal</p>
+        </header>
+
+        <div class="portal-grid">
+            <div class="portal-card">
+                <h2>CRM Portal</h2>
+                <a href="https://script.google.com/a/macros/urbantree.in/s/AKfycbwsQSCqzLjfbA0yzGxk_A8ooRWrAj4_No9u09zKE8DZP0lL0sO6Fq05muVB6uLY_MnD/exec" 
+                   target="_blank" 
+                   class="portal-button">
+                   Access CRM
+                </a>
+            </div>
+
+            <div class="portal-card">
+                <h2>Sales Dashboard</h2>
+                <a href="https://script.google.com/a/macros/urbantree.in/s/AKfycbzc96gOjrIbI6I89oG2Na8UELe4-I23hzqXQ59dJeJW42zMdgrL4c2MiPDSh8l6a_dK1Q/exec" 
+                   target="_blank" 
+                   class="portal-button">
+                   View Dashboard
+                </a>
+            </div>
+
+            <div class="portal-card">
+                <h2>Receipt Form</h2>
+                <a href="https://script.google.com/a/macros/urbantree.in/s/AKfycbzGm3rmqTrF56Jx61wjRo80xxNkblJPbYxfe7-PGwK52OUIHEFlXKWxr5_BTLu2e-Up1Q/exec" 
+                   target="_blank" 
+                   class="portal-button">
+                   Open Form
+                </a>
+            </div>
+
+            <div class="portal-card dropdown-container">
+                <h2>Master Sheets</h2>
+                <button class="portal-button dropdown-toggle" onclick="toggleDropdown()">
+                    Google Links
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="https://docs.google.com/spreadsheets/d/18JcsCfQr9QaxKnqwQnbW_0I6M8zdJFUhAW_g2T6A1qg/edit?gid=287530424#gid=287530424" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Onyx Enclave
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1oeHCC0Pdb06y-foEQP8tOVjAVCeJGWgjvzXRONzlUQI/edit?gid=986093879#gid=986093879" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Diamond Kingdom
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1vz8Txr1f9Rj0vEfyrTQP7VCU7nO5WsYMfe6BO_bJBYs/edit?gid=568255842#gid=568255842" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Limited Edition
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1F3t9gSnma1bjjhpctGgcxow4e_fBPl1-zZo2rsvKKCM/edit?gid=287530424#gid=287530424" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Silver Fields Ph 3
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1clCboJTBeCseaSqqUOygH2lvzPYfZrKG21ZXC4dI_7s/edit?gid=568255842#gid=568255842" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Pearl County Ph 2
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1r-UfUxM0dMrQntQm5sacIENdIMru--_lVVXCtGp9nfw/edit?gid=568255842#gid=568255842" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Amber County
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1uvGN7S2ibjqk8XuWzW-I9Ut-6omGv4ag_VRXdV3wux0/edit?gid=568255842#gid=568255842" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Muthukumaran Nagar
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1XcG8VJToCKON6hU6tYY6UGlqEAaKRifScd2ruYip1fk/edit?pli=1&gid=287530424#gid=287530424" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Sapphire Garden Ph 3
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1prAihCHPtMbh23dniGTHb1bSG5EdkFNeZG6vmUr2u24/edit?gid=287530424#gid=287530424" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Sunstone Garden
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1qNzJtg8ntLlZEqj5KntXl9wjnEYkJtc6kDDDltvYmIo/edit?gid=287530424#gid=287530424" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Crystal Crown Phase II
+                    </a>
+		    <a href="https://docs.google.com/spreadsheets/d/1AqxiK1Lsd-MEwhaYiE2dT5j_Vta9dfwYYJC5kDYQmMg/edit?gid=568255842#gid=568255842" 
+                       target="_blank" 
+                       class="dropdown-item">
+                       Master - Residenza Lillium Ph I to Ph V
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Urban Tree. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            const toggle = document.querySelector('.dropdown-toggle');
+            
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.dropdown-container');
+            const menu = document.getElementById('dropdownMenu');
+            const toggle = document.querySelector('.dropdown-toggle');
+            
+            if (!dropdown.contains(event.target)) {
+                menu.classList.remove('active');
+                toggle.classList.remove('active');
+            }
+        });
+
+        // Add smooth scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.portal-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
