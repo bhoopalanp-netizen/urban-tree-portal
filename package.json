@@ -1,0 +1,13 @@
+{
+  "name": "urban-tree-portal",
+  "version": "1.0.0",
+  "description": "Urban Tree Business Portal with Vercel Speed Insights",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Static HTML site - open Index1.html in browser'",
+    "build": "echo 'No build needed for static site'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
